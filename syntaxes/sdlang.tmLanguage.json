@@ -1,0 +1,210 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "SDLang",
+	"scopeName": "text.sdlang",
+	"patterns": [
+		{
+			"include": "#attribute"
+		},
+		{
+			"include": "#booleans"
+		},
+		{
+			"include": "#characters"
+		},
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#float"
+		},
+		{
+			"include": "#integer"
+		},
+		{
+			"include": "#line-continuation"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#tag-children"
+		},
+		{
+			"include": "#tag-name"
+		}
+	],
+	"repository": {
+		"attribute": {
+			"name": "entity.other.attribute-name.sdlang",
+			"match": "([[:alpha:]_][[:alnum:]_\\-.$]*(:))?[[:alpha:]_][[:alnum:]_\\-.$]*(=)",
+			"captures": {
+				"1": {
+					"name": "entity.name.namespace.sdlang"
+				},
+				"2": {
+					"name": "punctuation.separator.namespace.sdlang"
+				},
+				"3": {
+					"name": "punctuation.separator.key-value.sdlang"
+				}
+			}
+		},
+		"booleans": {
+			"name": "constant.language.boolean.sdlang",
+			"match": "(true|false)"
+		},
+		"characters": {
+			"name": "string.quoted.single.sdlang",
+			"match": "(').(')",
+			"captures": {
+				"1": {
+					"name": "punctuation.definition.string.begin.sdlang"
+				},
+				"2": {
+					"name": "punctuation.definition.string.end.sdlang"
+				}
+			}
+		},
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.line.double-slash.sdlang",
+					"match": "(//).*$",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.comment.sdlang"
+						}
+					}
+				},
+				{
+					"name": "comment.line.number-sign.sdlang",
+					"match": "(#).*$",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.comment.sdlang"
+						}
+					}
+				},
+				{
+					"name": "comment.line.double-dash.sdlang",
+					"match": "(--).*$",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.comment.sdlang"
+						}
+					}
+				},
+				{
+					"name": "comment.block.sdlang",
+					"begin": "/\\*",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.definition.comment.sdlang"
+						}
+					},
+					"end": "\\*/",
+					"endCaptures": {
+						"1": {
+							"name": "punctuation.definition.comment.sdlang"
+						}
+					}
+				}
+			]
+		},
+		"escape-sequence": {
+			"name": "constant.character.escape.sdlang",
+			"match": "\\\\[nrt\\\\\"]"
+		},
+		"float": {
+			"name": "constant.numeric.float.sdlang",
+			"match": "-?[\\d.]+(BD|bd|[FfDd])?"
+		},
+		"integer": {
+			"name": "constant.numeric.integer.sdlang",
+			"match": "-?\\d+[Ll]?"
+		},
+		"line-continuation": {
+			"name": "punctuation.separator.continuation.line.sdlang",
+			"match": "\\\\$"
+		},
+		"null": {
+			"name": "constant.language.null.sdlang",
+			"match": "null"
+		},
+		"strings": {
+			"patterns": [
+				{
+					"name": "string.quoted.double.sdlang",
+					"begin": "\"",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.begin.sdlang"
+						}
+					},
+					"end": "\"",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.end.sdlang"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#escape-sequence"
+						},
+						{
+							"include": "#line-continuation"
+						}
+					]
+				},
+				{
+					"name": "string.escaped.sdlang",
+					"begin": "`",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.begin.sdlang"
+						}
+					},
+					"end": "`",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.end.sdlang"
+						}
+					}
+				}
+			]
+		},
+		"tag-children": {
+			"name": "meta.tag-children.sdlang",
+			"begin": "\\{",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.tag-children.begin.sdlang"
+				}
+			},
+			"end": "\\}",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.tag-children.end.sdlang"
+				}
+			},
+			"patterns": [
+				{
+					"include": "$self"
+				}
+			]
+		},
+		"tag-name": {
+			"name": "entity.name.tag.sdlang",
+			"match": "^\\s*([[:alpha:]_][[:alnum:]_\\-.$]*(:))?[[:alpha:]_][[:alnum:]_\\-.$]*",
+			"captures": {
+				"1": {
+					"name": "entity.name.namespace.sdlang"
+				},
+				"2": {
+					"name": "punctuation.separator.namespace.sdlang"
+				}
+			}
+		}
+	}
+}

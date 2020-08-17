@@ -1,0 +1,28 @@
+{
+    "name": "sdlang",
+    "publisher": "arm32x",
+    "displayName": "SDLang",
+    "description": "SDLang support for VS Code.",
+    "version": "0.1.0",
+    "license": "Apache-2.0",
+    "repository": "https://github.com/arm32x/vscode-sdlang",
+    "engines": {
+        "vscode": "^1.48.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "sdl",
+            "aliases": ["SDLang", "sdl", "sdlang"],
+            "extensions": ["sdl"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "sdl",
+            "scopeName": "text.sdlang",
+            "path": "./syntaxes/sdlang.tmLanguage.json"
+        }]
+    }
+}
